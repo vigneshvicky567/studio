@@ -10,7 +10,7 @@ const PROJECTS = [
   {
     title: "Predictive Diagnostics",
     category: "ML & Web",
-    description: "Built a multi-disease prediction web app (Diabetes, Heart Disease, Parkinson’s, Breast Cancer) using Random Forest, Logistic Regression, and SVC.",
+    description: "Built a multi-disease prediction web app (Diabetes, Heart Disease, Parkinson’s, Breast Cancer) using Random Forest, Logistic Regression, and SVC. Focused on accessible healthcare.",
     features: [
       "Applied medical datasets analysis",
       "Confidence scores & feature importance",
@@ -23,7 +23,7 @@ const PROJECTS = [
   {
     title: "Knight Bite",
     category: "Frontend",
-    description: "Developed a mobile-first responsive food ordering website with modern UI and smooth navigation across all devices.",
+    description: "Developed a mobile-first responsive food ordering website with modern UI and smooth navigation across all devices. High emphasis on UI/UX.",
     features: [
       "Mobile-first responsive design",
       "Interactive food sections",
@@ -36,7 +36,7 @@ const PROJECTS = [
   {
     title: "RecoverEase",
     category: "AI & Full-Stack",
-    description: "AI-powered drug recovery platform with peer counseling, craving-control modules, and streak-based rewards.",
+    description: "AI-powered drug recovery platform with peer counseling, craving-control modules, and streak-based rewards for long-term recovery support.",
     features: [
       "AI chatbot for 24/7 guidance",
       "Role-based authentication",
@@ -50,19 +50,19 @@ const PROJECTS = [
 
 export function SectionProjects() {
   return (
-    <section id="projects" className="py-24 px-4 bg-white border-t-8 border-black">
+    <section id="projects" className="py-16 md:py-24 px-4 md:px-8 bg-white border-t-4 md:border-t-8 border-black">
       <div className="max-w-6xl mx-auto">
-        <div className="mb-16 text-center">
-          <h2 className="text-5xl md:text-6xl font-headline font-black mb-4 inline-block border-b-8 border-black">
+        <div className="mb-12 md:mb-16 text-center">
+          <h2 className="text-4xl md:text-6xl font-headline font-black mb-4 inline-block border-b-4 md:border-b-8 border-black uppercase">
             LATEST PROJECTS
           </h2>
-          <p className="font-code font-bold text-lg">/var/www/portfolio/work</p>
+          <p className="font-code font-bold text-sm md:text-lg text-muted-foreground">/var/www/portfolio/work</p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-12">
           {PROJECTS.map((project, i) => (
-            <HandDrawnCard key={i} className="group hover:-translate-y-2 transition-transform flex flex-col">
-              <div className="relative h-48 border-b-4 border-black overflow-hidden">
+            <HandDrawnCard key={i} className="group hover:-translate-y-2 transition-transform flex flex-col bg-white">
+              <div className="relative h-40 md:h-48 border-b-4 border-black overflow-hidden">
                 <Image 
                   src={project.image} 
                   alt={project.title} 
@@ -70,36 +70,36 @@ export function SectionProjects() {
                   className="object-cover group-hover:scale-105 transition-transform"
                   data-ai-hint="tech project"
                 />
-                <div className="absolute top-2 right-2 bg-primary border-2 border-black px-2 py-1 font-bold text-[10px] uppercase">
+                <div className="absolute top-2 right-2 bg-primary border-2 border-black px-2 py-0.5 md:py-1 font-bold text-[10px] md:text-xs uppercase">
                   {project.category}
                 </div>
               </div>
-              <div className="p-6 flex-1 flex flex-col">
+              <div className="p-4 md:p-6 flex-1 flex flex-col">
                 <div className="flex items-center gap-2 mb-2">
-                  {project.icon}
-                  <h3 className="text-2xl font-headline font-black uppercase">{project.title}</h3>
+                  <span className="shrink-0">{project.icon}</span>
+                  <h3 className="text-xl md:text-2xl font-headline font-black uppercase truncate">{project.title}</h3>
                 </div>
-                <p className="font-body text-sm mb-4 line-clamp-3">{project.description}</p>
+                <p className="font-body text-xs md:text-sm mb-4 text-muted-foreground line-clamp-3 md:line-clamp-none">{project.description}</p>
                 
-                <ul className="mb-6 space-y-1">
+                <ul className="mb-6 space-y-1 hidden sm:block">
                   {project.features.map((feature, idx) => (
-                    <li key={idx} className="font-body text-xs flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 bg-black rounded-full" /> {feature}
+                    <li key={idx} className="font-body text-[10px] md:text-xs flex items-center gap-2">
+                      <span className="w-1 md:w-1.5 h-1 md:h-1.5 bg-black rounded-full" /> {feature}
                     </li>
                   ))}
                 </ul>
 
                 <div className="mt-auto">
-                  <div className="flex flex-wrap gap-2 mb-6">
+                  <div className="flex flex-wrap gap-1.5 md:gap-2 mb-4 md:mb-6">
                     {project.tags.map(tag => (
-                      <span key={tag} className="text-[10px] font-bold uppercase bg-secondary/30 border border-black px-2 py-0.5">
+                      <span key={tag} className="text-[9px] md:text-[10px] font-bold uppercase bg-secondary/30 border border-black px-1.5 md:px-2 py-0.5">
                         {tag}
                       </span>
                     ))}
                   </div>
                   <div className="flex gap-4">
-                     <button className="flex items-center gap-1 font-code font-bold text-xs hover:underline"><Github className="w-4 h-4" /> CODE</button>
-                     <button className="flex items-center gap-1 font-code font-bold text-xs hover:underline"><ExternalLink className="w-4 h-4" /> LIVE</button>
+                     <button className="flex items-center gap-1 font-code font-bold text-[10px] md:text-xs hover:underline"><Github className="w-3.5 h-3.5 md:w-4 md:h-4" /> CODE</button>
+                     <button className="flex items-center gap-1 font-code font-bold text-[10px] md:text-xs hover:underline"><ExternalLink className="w-3.5 h-3.5 md:w-4 md:h-4" /> LIVE</button>
                   </div>
                 </div>
               </div>

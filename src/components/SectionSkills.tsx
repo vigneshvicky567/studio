@@ -25,7 +25,7 @@ const SKILLS = [
   {
     category: "Soft Skills",
     icon: <Heart className="w-6 h-6" />,
-    items: ["Communication", "Team Collaboration", "Leadership", "Time Management"]
+    items: ["Communication", "Teamwork", "Leadership", "Management"]
   }
 ];
 
@@ -37,28 +37,28 @@ export function SectionSkills() {
   const scale = Math.max(0.9, 1 - progress * 0.1);
 
   return (
-    <section id="skills" ref={containerRef} className="relative min-h-screen py-24 flex flex-col items-center justify-center overflow-hidden">
+    <section id="skills" ref={containerRef} className="relative min-h-screen py-16 md:py-24 flex flex-col items-center justify-center overflow-hidden">
       <div 
         style={{ opacity, transform: `scale(${scale})` }}
-        className="w-full max-w-5xl px-4 transition-all duration-300"
+        className="w-full max-w-5xl px-4 transition-all duration-300 z-10"
       >
-        <div className="mb-12 text-center">
-          <h2 className="font-headline text-6xl md:text-8xl font-black mb-4">SKILLS</h2>
-          <p className="font-code text-muted-foreground">/usr/bin/expertise</p>
+        <div className="mb-8 md:mb-12 text-center">
+          <h2 className="font-headline text-5xl sm:text-7xl md:text-8xl font-black mb-2 md:mb-4 uppercase">SKILLS</h2>
+          <p className="font-code text-xs md:text-sm text-muted-foreground uppercase tracking-widest">/usr/bin/expertise</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-8">
           {SKILLS.map((skillGroup) => (
-            <HandDrawnCard key={skillGroup.category} className="p-8 group hover:bg-white hover:rotate-1 transition-all">
-              <div className="flex items-center gap-4 mb-6">
-                <div className="w-12 h-12 border-4 border-black bg-primary flex items-center justify-center">
+            <HandDrawnCard key={skillGroup.category} className="p-6 md:p-8 group hover:bg-white hover:rotate-1 transition-all">
+              <div className="flex items-center gap-3 md:gap-4 mb-4 md:mb-6">
+                <div className="w-10 h-10 md:w-12 md:h-12 border-4 border-black bg-primary flex items-center justify-center shrink-0">
                   {skillGroup.icon}
                 </div>
-                <h3 className="font-headline text-3xl font-black uppercase">{skillGroup.category}</h3>
+                <h3 className="font-headline text-2xl md:text-3xl font-black uppercase">{skillGroup.category}</h3>
               </div>
-              <div className="flex flex-wrap gap-3">
+              <div className="flex flex-wrap gap-2 md:gap-3">
                 {skillGroup.items.map(skill => (
-                  <span key={skill} className="pill-skill text-lg px-4 py-2 bg-background">
+                  <span key={skill} className="pill-skill text-sm md:text-lg px-3 md:px-4 py-1 md:py-2 bg-background whitespace-nowrap">
                     {skill}
                   </span>
                 ))}
@@ -67,9 +67,9 @@ export function SectionSkills() {
           ))}
         </div>
 
-        <div className="mt-16 flex justify-center">
-          <HandDrawnCard bg="bg-secondary" className="p-6 transform -rotate-2 hover:rotate-0">
-            <p className="font-headline text-2xl font-black uppercase">Building the future with data ↓</p>
+        <div className="mt-12 md:mt-16 flex justify-center">
+          <HandDrawnCard bg="bg-secondary" className="p-4 md:p-6 transform -rotate-2 hover:rotate-0 transition-transform">
+            <p className="font-headline text-xl md:text-2xl font-black uppercase text-center">Building the future with data ↓</p>
           </HandDrawnCard>
         </div>
       </div>

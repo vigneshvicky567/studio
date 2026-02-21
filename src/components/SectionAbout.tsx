@@ -25,12 +25,11 @@ export function SectionAbout() {
   }, []);
 
   const renderTextWithHighlights = () => {
-    let parts = [ABOUT_TEXT];
     const sortedKeywords = [...keywords].sort((a, b) => b.length - a.length);
     const getProgressForKeyword = (index: number) => 0.2 + (index / sortedKeywords.length) * 0.6;
 
     return (
-      <div className="text-xl md:text-3xl leading-relaxed font-headline font-bold text-center space-y-4">
+      <div className="text-lg sm:text-xl md:text-3xl leading-relaxed font-headline font-bold text-center space-y-4">
         {ABOUT_TEXT.split(' ').map((word, i) => {
           const cleanedWord = word.replace(/[.,]/g, '');
           const keywordIndex = sortedKeywords.findIndex(k => k.toLowerCase().includes(cleanedWord.toLowerCase()));
@@ -43,12 +42,12 @@ export function SectionAbout() {
           return (
             <span 
               key={i} 
-              className={`relative inline-block mx-1 transition-colors duration-500`}
+              className={`relative inline-block mx-0.5 md:mx-1 transition-colors duration-500`}
             >
               <span className={`relative z-10`}>{word}</span>
               {isKeyword && (
                 <span 
-                  className={`absolute bottom-0 left-0 h-3/4 -z-0 transition-all duration-700 ease-out ${highlightColor}`}
+                  className={`absolute bottom-0 left-0 h-1/2 md:h-3/4 -z-0 transition-all duration-700 ease-out ${highlightColor}`}
                   style={{ width: isActive ? '100%' : '0%' }}
                 />
               )}
@@ -60,15 +59,15 @@ export function SectionAbout() {
   };
 
   return (
-    <section id="about" ref={containerRef} className="min-h-screen bg-white py-24 flex flex-col items-center justify-center px-4">
+    <section id="about" ref={containerRef} className="min-h-screen bg-white py-16 md:py-24 flex flex-col items-center justify-center px-4 md:px-8">
       <div className="max-w-4xl w-full">
-        <h2 className="text-6xl font-headline font-black mb-16 text-center border-b-8 border-black pb-4 inline-block mx-auto">
+        <h2 className="text-4xl md:text-6xl font-headline font-black mb-8 md:mb-16 text-center border-b-4 md:border-b-8 border-black pb-2 md:pb-4 inline-block mx-auto uppercase">
           ABOUT
         </h2>
-        <div className="bg-background/20 p-8 md:p-12 hand-drawn-border">
+        <div className="bg-background/20 p-6 sm:p-8 md:p-12 hand-drawn-border">
           {renderTextWithHighlights()}
         </div>
-        <p className="mt-12 text-center font-code text-muted-foreground animate-pulse">
+        <p className="mt-8 md:mt-12 text-center font-code text-xs md:text-sm text-muted-foreground animate-pulse uppercase tracking-wider">
           Keep scrolling to see my focus areas...
         </p>
       </div>
