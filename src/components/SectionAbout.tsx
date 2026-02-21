@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useRef, useState, useEffect } from "react";
@@ -63,12 +62,12 @@ export function SectionAbout() {
   };
 
   return (
-    <section id="about" ref={containerRef} className="min-h-screen bg-white py-16 md:py-24 flex flex-col items-center justify-center px-4 md:px-8">
+    <section id="about" ref={containerRef} className="min-h-screen bg-transparent py-16 md:py-24 flex flex-col items-center justify-center px-4 md:px-8">
       <div className="max-w-4xl w-full">
         <h2 className="text-4xl md:text-6xl font-headline font-black mb-8 md:mb-16 text-center border-b-4 md:border-b-8 border-black pb-2 md:pb-4 inline-block mx-auto uppercase">
           ABOUT
         </h2>
-        <div className="bg-background/20 p-6 sm:p-8 md:p-12 hand-drawn-border">
+        <div className="bg-white p-6 sm:p-8 md:p-12 hand-drawn-border">
           {renderTextWithHighlights()}
         </div>
         <p className="mt-8 md:mt-12 text-center font-code text-xs md:text-sm text-muted-foreground animate-pulse uppercase tracking-wider">

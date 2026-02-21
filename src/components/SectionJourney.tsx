@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useRef } from "react";
@@ -44,7 +43,7 @@ export function SectionJourney() {
   const progress = useScrollProgress(containerRef);
 
   return (
-    <section id="journey" ref={containerRef} className="py-12 md:py-20 px-4 md:px-8 bg-white flex flex-col items-center">
+    <section id="journey" ref={containerRef} className="py-12 md:py-20 px-4 md:px-8 bg-transparent flex flex-col items-center">
       <div className="max-w-6xl w-full">
         <div className="mb-10 text-center">
           <h2 className="text-4xl md:text-6xl font-headline font-black uppercase inline-block border-b-8 border-black pb-2">
@@ -56,14 +55,13 @@ export function SectionJourney() {
           {/* Main Education Timeline Area */}
           <div className="lg:col-span-2 space-y-6 md:space-y-8">
             {EDUCATION.map((edu, i) => {
-              // Trigger sooner: start appearing when section is 5% in view
               const threshold = 0.05 + (i * 0.1);
               const isActive = progress > threshold;
               
               return (
                 <HandDrawnCard 
                   key={i} 
-                  className={`p-6 md:p-8 transition-all duration-700 ease-out border-4 border-black ${
+                  className={`p-6 md:p-8 transition-all duration-700 ease-out border-4 border-black bg-white ${
                     isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
                   }`}
                 >

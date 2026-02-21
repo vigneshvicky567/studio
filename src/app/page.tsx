@@ -1,7 +1,6 @@
-
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { SectionSkills } from "@/components/SectionSkills";
 import { SectionLoading } from "@/components/SectionLoading";
 import { SectionHero } from "@/components/SectionHero";
@@ -16,7 +15,7 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
 
   return (
-    <main className="min-h-screen bg-background text-foreground selection:bg-primary">
+    <main className="min-h-screen bg-background text-foreground selection:bg-primary sketch-grid">
       {/* 1. Intro Loading Screen Overlay */}
       {loading && <SectionLoading onComplete={() => setLoading(false)} />}
 

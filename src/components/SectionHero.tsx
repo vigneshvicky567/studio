@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useRef } from "react";
@@ -23,10 +22,7 @@ export function SectionHero() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   return (
-    <section id="hero" ref={containerRef} className="relative min-h-screen bg-white flex flex-col items-center justify-center overflow-hidden pt-24 md:pt-32 pb-12 md:pb-20 px-4 md:px-8">
-      {/* Grid Background Overlay */}
-      <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle, black 1px, transparent 1px)', backgroundSize: '20px 20px' }} />
-
+    <section id="hero" ref={containerRef} className="relative min-h-screen bg-transparent flex flex-col items-center justify-center overflow-hidden pt-24 md:pt-32 pb-12 md:pb-20 px-4 md:px-8">
       <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center z-10">
         
         {/* Left Column: Text Content */}

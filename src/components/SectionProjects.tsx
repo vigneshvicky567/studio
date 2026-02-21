@@ -1,4 +1,3 @@
-
 "use client";
 
 import React from "react";
@@ -50,7 +49,7 @@ const PROJECTS = [
 
 export function SectionProjects() {
   return (
-    <section id="projects" className="py-16 md:py-24 px-4 md:px-8 bg-white border-t-4 md:border-t-8 border-black">
+    <section id="projects" className="py-16 md:py-24 px-4 md:px-8 bg-transparent border-t-4 md:border-t-8 border-black">
       <div className="max-w-6xl mx-auto">
         <div className="mb-12 md:mb-16 text-center">
           <h2 className="text-4xl md:text-6xl font-headline font-black mb-4 inline-block border-b-4 md:border-b-8 border-black uppercase">
