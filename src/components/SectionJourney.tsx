@@ -5,24 +5,43 @@ import React, { useRef } from "react";
 import Image from "next/image";
 import { useScrollProgress } from "@/hooks/use-scroll-progress";
 import { HandDrawnCard } from "./HandDrawnCard";
-import { Compass, Ship, Anchor } from "lucide-react";
+import { Ship, Plus, Minus, Home } from "lucide-react";
 
 const TIMELINE = [
-  { year: "2013", location: "Albania", role: "Junior Developer", x: "70%", y: "80%" },
-  { year: "2016", location: "Italy", role: "Backend Engineer", x: "40%", y: "70%" },
-  { year: "2019", location: "Germany", role: "Senior Developer", x: "45%", y: "45%" },
-  { year: "2024", location: "Munich", role: "Tech Lead", x: "48%", y: "52%" },
+  { 
+    year: "JUL 2020 - NOV 2021", 
+    location: "Bologna, Italy", 
+    role: "Senior Software Engineer @ Brinzona", 
+    description: "Part of core team working on AI-powered Media & Data Intelligence Solutions. Designed and built microservices for distributed systems, engineered data pipelines on Google Cloud.",
+    x: "42%", 
+    y: "68%",
+    city: "BOLOGNA"
+  },
+  { 
+    year: "JUL 2018 - JUN 2020", 
+    location: "Tirana, Albania", 
+    role: "Senior Software Engineer @ Shauk Solutions", 
+    description: "Part of core team leading tech decisions. Led Apple-Mobile-CRM for Toyota and Microsoft. ICT market project deployed across USA, Canada, and Australia.",
+    x: "58%", 
+    y: "75%",
+    city: "TIRANA"
+  },
+  { 
+    year: "2015 - 2018", 
+    location: "Munich, Germany", 
+    role: "Software Engineer @ Gutenberg", 
+    description: "Developed cloud-native applications using React and Node.js. Focused on performance optimization and scalable architecture.",
+    x: "48%", 
+    y: "50%",
+    city: "MUNICH"
+  }
 ];
 
 export function SectionJourney() {
   const containerRef = useRef<HTMLDivElement>(null);
   const progress = useScrollProgress(containerRef);
 
-  // Map tilt calculations
-  const rotateX = progress * 30; // Tilt from 0 to 30deg
-  const rotateY = (progress - 0.5) * -10;
-
-  // Pirate path calculation
+  // Calculate pirate position based on scroll progress
   const getAvatarPosition = () => {
     const stepCount = TIMELINE.length - 1;
     const currentStepFloat = progress * stepCount;
@@ -42,94 +61,127 @@ export function SectionJourney() {
   const avatarPos = getAvatarPosition();
 
   return (
-    <section ref={containerRef} className="relative min-h-[200vh] bg-secondary/20 py-24 px-4 overflow-hidden">
-      <div className="sticky top-0 h-screen flex flex-col md:flex-row items-center justify-between gap-8 max-w-7xl mx-auto">
-        
-        {/* Left Side: Timeline Text */}
-        <div className="w-full md:w-1/3 z-10">
-          <h2 className="text-5xl font-headline font-black mb-8 flex items-center gap-4">
-            MY JOURNEY <Ship />
+    <section id="journey" ref={containerRef} className="min-h-[150vh] bg-white py-24 px-4 flex flex-col items-center">
+      <div className="max-w-6xl w-full">
+        {/* Section Title Box */}
+        <HandDrawnCard className="w-full py-6 mb-8 text-center bg-white">
+          <h2 className="text-4xl font-headline font-black uppercase tracking-tight flex items-center justify-center gap-4">
+            My Journey
           </h2>
-          <div className="space-y-12">
-            {TIMELINE.map((item, i) => {
-              const itemProgress = (i / (TIMELINE.length - 1));
-              const isActive = progress >= itemProgress - 0.1 && progress <= itemProgress + 0.1;
+        </HandDrawnCard>
 
-              return (
-                <HandDrawnCard 
+        {/* Main Journey Card */}
+        <div className="sticky top-32">
+          <HandDrawnCard className="flex flex-col md:flex-row overflow-hidden min-h-[600px] bg-white">
+            
+            {/* Left Pane: Timeline */}
+            <div className="w-full md:w-[40%] border-b-4 md:border-b-0 md:border-r-4 border-black flex flex-col">
+              <div className="p-4 border-b-4 border-black bg-white">
+                <h3 className="font-headline font-black uppercase text-sm">Journey Timeline</h3>
+              </div>
+              
+              <div className="flex-1 p-6 space-y-8 overflow-y-auto">
+                {TIMELINE.map((item, i) => {
+                  const itemProgress = i / (TIMELINE.length - 1);
+                  const isActive = progress >= itemProgress - 0.1 && progress <= itemProgress + 0.1;
+                  
+                  return (
+                    <div key={i} className={`relative pl-8 transition-opacity duration-300 ${isActive ? 'opacity-100' : 'opacity-40'}`}>
+                      {/* Timeline Dot & Line */}
+                      <div className="absolute left-0 top-1.5 w-4 h-4 rounded-full bg-black z-10" />
+                      {i !== TIMELINE.length - 1 && (
+                        <div className="absolute left-[7px] top-4 w-0.5 h-[calc(100%+2rem)] bg-black/20" />
+                      )}
+                      
+                      <div className="space-y-1">
+                        <h4 className="font-headline font-black text-lg leading-tight uppercase">
+                          {item.role}
+                        </h4>
+                        <p className="font-code text-[10px] font-bold text-muted-foreground uppercase">
+                          {item.year}
+                        </p>
+                        <p className="font-body text-sm leading-relaxed pt-2">
+                          {item.description}
+                        </p>
+                        <p className="font-code text-[10px] font-bold text-blue-500 pt-2 flex items-center gap-1">
+                          <span className="w-2 h-2 rounded-full bg-blue-500" /> {item.location}
+                        </p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Right Pane: Map Area */}
+            <div className="w-full md:w-[60%] relative bg-[#E6F3F7] overflow-hidden">
+              {/* Map Placeholder */}
+              <div className="absolute inset-0 z-0">
+                <Image 
+                  src="https://picsum.photos/seed/map-sketch/1200/900"
+                  alt="Map Background"
+                  fill
+                  className="object-cover opacity-50 mix-blend-multiply"
+                  data-ai-hint="illustrated map"
+                />
+              </div>
+
+              {/* Map Overlay Grid */}
+              <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: 'linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
+
+              {/* Map UI Elements */}
+              <div className="absolute top-4 left-4 flex flex-col gap-2 z-20">
+                <button className="w-8 h-8 border-2 border-black bg-white flex items-center justify-center hover:bg-gray-100">
+                  <Plus className="w-4 h-4" />
+                </button>
+                <button className="w-8 h-8 border-2 border-black bg-white flex items-center justify-center hover:bg-gray-100">
+                  <Minus className="w-4 h-4" />
+                </button>
+              </div>
+              <div className="absolute top-4 right-4 z-20">
+                <button className="w-10 h-10 border-2 border-black bg-white flex items-center justify-center hover:bg-gray-100 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                  <Home className="w-5 h-5" />
+                </button>
+              </div>
+
+              {/* Map Locations & Pins */}
+              {TIMELINE.map((item, i) => (
+                <div 
                   key={i} 
-                  className={`p-4 transition-all duration-300 transform ${isActive ? 'scale-110 bg-primary rotate-0' : 'scale-100 bg-white rotate-2 opacity-50'}`}
+                  className="absolute z-10 flex flex-col items-center" 
+                  style={{ top: item.y, left: item.x }}
                 >
-                  <span className="font-code text-sm font-bold block">{item.year}</span>
-                  <h3 className="font-headline text-xl font-bold">{item.location}</h3>
-                  <p className="font-body text-sm">{item.role}</p>
-                </HandDrawnCard>
-              );
-            })}
-          </div>
-        </div>
+                  <div className="bg-primary border-2 border-black px-2 py-0.5 text-[10px] font-black uppercase mb-1 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                    {item.city}
+                  </div>
+                  <div className="w-6 h-6 border-2 border-black rounded-full bg-white flex items-center justify-center">
+                    <div className="w-2 h-2 bg-black rounded-full animate-ping" />
+                  </div>
+                </div>
+              ))}
 
-        {/* Right Side: 3D Map */}
-        <div className="w-full md:w-2/3 h-[500px] md:h-[700px] relative perspective-1000">
-          <div 
-            className="w-full h-full hand-drawn-border bg-[#b3e5fc] relative transition-transform duration-100 ease-linear overflow-hidden"
-            style={{ 
-              transform: `rotateX(${rotateX}deg) rotateY(${rotateY}deg) rotateZ(5deg)`,
-              transformStyle: 'preserve-3d'
-            }}
-          >
-            {/* Map Placeholder */}
-            <Image 
-              src="https://picsum.photos/seed/map-europe/800/600"
-              alt="Europe Map"
-              fill
-              className="object-cover opacity-60 mix-blend-multiply"
-              data-ai-hint="illustrated map"
-            />
-
-            {/* Path Pins */}
-            {TIMELINE.map((item, i) => (
+              {/* Pirate Character Moving on Map */}
               <div 
-                key={i}
-                className="absolute z-20"
-                style={{ top: item.y, left: item.x }}
+                className="absolute z-30 transition-all duration-300 ease-linear flex flex-col items-center pointer-events-none"
+                style={{ top: avatarPos.y, left: avatarPos.x, transform: 'translate(-50%, -85%)' }}
               >
-                <div className="w-4 h-4 bg-black rounded-full animate-pulse shadow-[0_0_10px_rgba(0,0,0,0.5)]" />
-                <div className="absolute top-6 left-1/2 -translate-x-1/2 whitespace-nowrap bg-white border-2 border-black px-2 py-0.5 text-xs font-bold font-code">
-                  {item.location}
+                <div className="relative w-24 h-24">
+                  <Image 
+                    src="https://picsum.photos/seed/pirate-char/300/300"
+                    alt="Pirate Avatar"
+                    fill
+                    className="object-contain drop-shadow-[4px_4px_0px_rgba(0,0,0,0.2)]"
+                    data-ai-hint="pirate character"
+                  />
                 </div>
               </div>
-            ))}
-
-            {/* Pirate Avatar Moving */}
-            <div 
-              className="absolute z-30 transition-all duration-100 ease-linear flex flex-col items-center"
-              style={{ top: avatarPos.y, left: avatarPos.x, transform: 'translate(-50%, -100%)' }}
-            >
-              <div className="relative w-16 h-16 md:w-24 md:h-24">
-                 <div className="absolute -top-4 -right-2 bg-black text-white px-2 py-1 text-[10px] rounded animate-bounce">AHOY!</div>
-                 <Image 
-                  src="https://picsum.photos/seed/pirate-avatar/200/200"
-                  alt="Pirate Avatar"
-                  fill
-                  className="hand-drawn-border rounded-full bg-white object-cover"
-                  data-ai-hint="pirate avatar"
-                 />
-              </div>
-              <div className="w-8 h-2 bg-black/20 rounded-full mt-1 blur-sm" />
             </div>
-
-            {/* Compass rose */}
-            <div className="absolute bottom-8 right-8">
-              <Compass className="w-16 h-16 opacity-30" />
-            </div>
-          </div>
+          </HandDrawnCard>
         </div>
-      </div>
-      
-      {/* Scroll indicator for the sticky section */}
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 font-code text-sm animate-bounce">
-         SCROLL THROUGH MY STORY ↓
+
+        <div className="mt-20 text-center font-code text-sm opacity-50 uppercase tracking-widest animate-pulse">
+          Scroll to navigate the map
+        </div>
       </div>
     </section>
   );
