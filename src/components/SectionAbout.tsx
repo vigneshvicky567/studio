@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useRef, useState, useEffect } from "react";
@@ -10,7 +9,6 @@ const ABOUT_TEXT = "I am a highly motivated Computer Science undergraduate speci
 const HIGHLIGHT_MAP: Record<string, string> = {
   "AI and Data Science": "bg-yellow-300",
   "8 years": "bg-yellow-300",
-  "Senior Software Engineer": "bg-blue-300",
   "technical expertise": "bg-blue-300",
   "full-stack development": "bg-pink-300",
   "Java": "bg-yellow-200",
@@ -29,7 +27,6 @@ export function SectionAbout() {
     async function getKeywords() {
       try {
         const result = await suggestHighlightKeywords({ aboutSectionText: ABOUT_TEXT });
-        // Merge suggested keywords if they match our style
         const merged = Array.from(new Set([...Object.keys(HIGHLIGHT_MAP), ...result.keywords]));
         setKeywords(merged);
       } catch (e) {
@@ -44,11 +41,11 @@ export function SectionAbout() {
     const words = ABOUT_TEXT.split(' ');
     
     return (
-      <div className="text-xl md:text-4xl leading-relaxed font-headline font-bold text-center">
+      <div className="text-lg md:text-3xl leading-relaxed font-headline font-bold text-center max-w-4xl mx-auto">
         {words.map((word, i) => {
           const cleanedWord = word.replace(/[.,]/g, '');
           const keywordMatch = sortedKeywords.find(k => k.toLowerCase().includes(cleanedWord.toLowerCase()));
-          const activationThreshold = 0.2 + (i / words.length) * 0.4;
+          const activationThreshold = 0.15 + (i / words.length) * 0.4;
           const isActive = keywordMatch && progress > activationThreshold;
           
           const highlightColor = HIGHLIGHT_MAP[keywordMatch || ""] || "bg-blue-200";
@@ -60,7 +57,7 @@ export function SectionAbout() {
               </span>
               {keywordMatch && (
                 <span 
-                  className={`absolute bottom-1 left-0 h-3/4 -z-0 rounded-lg transition-all duration-700 ease-out ${highlightColor}`}
+                  className={`absolute bottom-1 left-0 h-3/5 -z-0 rounded-lg transition-all duration-700 ease-out ${highlightColor}`}
                   style={{ width: isActive ? '100%' : '0%' }}
                 />
               )}
@@ -72,15 +69,15 @@ export function SectionAbout() {
   };
 
   return (
-    <section id="about" ref={containerRef} className="min-h-screen bg-white py-24 md:py-40 flex flex-col items-center justify-center px-4 md:px-8">
+    <section id="about" ref={containerRef} className="bg-white py-16 md:py-24 flex flex-col items-center justify-center px-4 md:px-8">
       <div className="max-w-5xl w-full">
-        <div className="mb-16 md:mb-24 text-center">
-          <h2 className="text-6xl md:text-9xl font-headline font-black mb-4 inline-block relative">
+        <div className="mb-10 md:mb-14 text-center">
+          <h2 className="text-4xl md:text-7xl font-headline font-black mb-2 inline-block relative">
             ABOUT
-            <span className="absolute -bottom-4 left-0 w-full h-4 bg-black rounded-full" />
+            <span className="absolute -bottom-2 left-0 w-full h-2 md:h-3 bg-black rounded-full" />
           </h2>
         </div>
-        <div className="px-4">
+        <div className="px-2">
           {renderTextWithHighlights()}
         </div>
       </div>
