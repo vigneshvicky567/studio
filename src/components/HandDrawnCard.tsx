@@ -6,12 +6,14 @@ interface HandDrawnCardProps {
   children: React.ReactNode;
   className?: string;
   bg?: string;
+  rounded?: string;
 }
 
-export function HandDrawnCard({ children, className, bg = "bg-white" }: HandDrawnCardProps) {
+export function HandDrawnCard({ children, className, bg = "bg-white", rounded = "rounded-sm" }: HandDrawnCardProps) {
   return (
     <div className={cn(
-      "hand-drawn-border rounded-sm transition-all",
+      "hand-drawn-border transition-all",
+      rounded,
       bg,
       className
     )}>
