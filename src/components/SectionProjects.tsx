@@ -64,9 +64,10 @@ export function SectionProjects() {
               <div className="relative h-40 md:h-44 border-b-4 border-black overflow-hidden">
                 <Image 
                   src={project.image} 
-                  alt={project.title} 
+                  alt={`Screenshot of ${project.title} project`} 
                   fill 
                   className="object-cover group-hover:scale-105 transition-transform"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   data-ai-hint="tech project"
                 />
                 <div className="absolute top-2 right-2 bg-primary border-2 border-black px-2 py-0.5 font-bold text-[10px] md:text-xs uppercase">
@@ -75,7 +76,7 @@ export function SectionProjects() {
               </div>
               <div className="p-4 md:p-5 flex-1 flex flex-col">
                 <div className="flex items-center gap-2 mb-2">
-                  <span className="shrink-0">{project.icon}</span>
+                  <span className="shrink-0" aria-hidden="true">{project.icon}</span>
                   <h3 className="text-lg md:text-xl font-headline font-black uppercase truncate">{project.title}</h3>
                 </div>
                 <p className="font-body text-xs md:text-sm mb-3 text-muted-foreground line-clamp-2">{project.description}</p>
@@ -83,7 +84,7 @@ export function SectionProjects() {
                 <ul className="mb-4 space-y-1 hidden sm:block">
                   {project.features.map((feature, idx) => (
                     <li key={idx} className="font-body text-[10px] md:text-xs flex items-center gap-2">
-                      <span className="w-1 md:w-1.5 h-1 md:h-1.5 bg-black rounded-full" /> {feature}
+                      <span className="w-1 md:w-1.5 h-1 md:h-1.5 bg-black rounded-full" aria-hidden="true" /> {feature}
                     </li>
                   ))}
                 </ul>
@@ -97,8 +98,12 @@ export function SectionProjects() {
                     ))}
                   </div>
                   <div className="flex gap-4">
-                     <button className="flex items-center gap-1 font-code font-bold text-[10px] md:text-xs hover:underline"><Github className="w-3.5 h-3.5" /> CODE</button>
-                     <button className="flex items-center gap-1 font-code font-bold text-[10px] md:text-xs hover:underline"><ExternalLink className="w-3.5 h-3.5" /> LIVE</button>
+                     <button className="flex items-center gap-1 font-code font-bold text-[10px] md:text-xs hover:underline" aria-label={`View code for ${project.title}`}>
+                        <Github className="w-3.5 h-3.5" /> CODE
+                     </button>
+                     <button className="flex items-center gap-1 font-code font-bold text-[10px] md:text-xs hover:underline" aria-label={`View live demo of ${project.title}`}>
+                        <ExternalLink className="w-3.5 h-3.5" /> LIVE
+                     </button>
                   </div>
                 </div>
               </div>

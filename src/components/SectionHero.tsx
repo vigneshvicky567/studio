@@ -1,11 +1,10 @@
-
 "use client";
 
 import React, { useRef } from "react";
 import Image from "next/image";
 import { HandDrawnCard } from "./HandDrawnCard";
 import { Button } from "./ui/button";
-import { Code, Terminal, Database, Github, Coffee } from "lucide-react";
+import { Code, Terminal, Database, Coffee } from "lucide-react";
 
 const TECH_TAGS = [
   { name: "Python" },
@@ -23,13 +22,12 @@ export function SectionHero() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   return (
-    <section id="hero" ref={containerRef} className="relative min-h-screen bg-[#FFDA63] flex flex-col items-center justify-center pt-24 pb-20 px-4 md:px-8 overflow-hidden">
+    <section id="hero" ref={containerRef} className="relative min-h-screen bg-[#FFDA63] flex flex-col items-center justify-center pt-24 pb-16 px-4 md:px-8 overflow-hidden">
       <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center z-10">
         
-        {/* Left Column: Text Content */}
         <div className="space-y-6 text-center lg:text-left">
           <div className="relative inline-block">
-            <div className="bg-white border-4 border-black px-4 py-2 rounded-2xl rotate-[-5deg] font-headline font-black text-xl animate-bounce shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+            <div className="bg-white border-4 border-black px-4 py-2 rounded-2xl -rotate-3 font-headline font-black text-xl animate-bounce shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
               Hi there! 🚀
             </div>
           </div>
@@ -53,7 +51,7 @@ export function SectionHero() {
               rel="noopener noreferrer"
               className="flex items-center gap-3 bg-white text-black border-4 border-black px-6 py-3 font-black text-lg shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-0.5 hover:translate-y-0.5 transition-all"
             >
-              <div className="w-6 h-6 bg-[#0077B5] flex items-center justify-center border-2 border-black">
+              <div className="w-6 h-6 bg-[#0077B5] flex items-center justify-center border-2 border-black" aria-hidden="true">
                 <span className="text-white text-[12px] font-black">in</span>
               </div>
               Connect on LinkedIn
@@ -70,35 +68,34 @@ export function SectionHero() {
           </div>
         </div>
 
-        {/* Right Column: Visual Content */}
         <div className="relative flex justify-center order-first lg:order-last">
           <div className="relative w-[280px] h-[280px] sm:w-[350px] sm:h-[350px] md:w-[450px] md:h-[450px]">
-            {/* Avatar Frame - Perfect Circle */}
             <div className="w-full h-full p-0 overflow-hidden relative z-10 bg-white border-8 border-black rounded-full shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
                <Image 
                 src="https://picsum.photos/seed/prasanna-hero/600/600" 
-                alt="Prasannalakshmi MD" 
+                alt="Prasannalakshmi MD smiling avatar" 
                 fill 
                 className="object-cover"
+                priority // LCP Optimization
+                sizes="(max-width: 768px) 280px, (max-width: 1200px) 450px, 450px"
                 data-ai-hint="friendly avatar"
                />
             </div>
 
-            {/* Floating Icons */}
             <div className="absolute -top-4 -left-4 z-20 animate-bounce-custom">
-               <HandDrawnCard className="p-3 bg-white border-4 border-black rounded-xl rotate-[-15deg] shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+               <HandDrawnCard className="p-3 bg-white border-4 border-black rounded-xl -rotate-12 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
                  <Code className="w-8 h-8 text-blue-500" />
                </HandDrawnCard>
             </div>
             
             <div className="absolute top-1/4 -right-6 z-20 animate-bounce-custom" style={{ animationDelay: '0.5s' }}>
-               <HandDrawnCard className="p-3 bg-white border-4 border-black rounded-xl rotate-[10deg] shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+               <HandDrawnCard className="p-3 bg-white border-4 border-black rounded-xl rotate-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
                  <Terminal className="w-8 h-8 text-yellow-500" />
                </HandDrawnCard>
             </div>
 
             <div className="absolute bottom-1/4 -left-10 z-20 animate-bounce-custom" style={{ animationDelay: '1s' }}>
-               <HandDrawnCard className="p-3 bg-white border-4 border-black rounded-xl rotate-[-5deg] shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+               <HandDrawnCard className="p-3 bg-white border-4 border-black rounded-xl -rotate-3 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
                  <Database className="w-8 h-8 text-blue-500" />
                </HandDrawnCard>
             </div>
@@ -106,8 +103,7 @@ export function SectionHero() {
         </div>
       </div>
 
-      {/* Bottom Tech Tags Row */}
-      <div className="w-full max-w-7xl mt-16 flex flex-col items-center gap-6">
+      <div className="w-full max-w-7xl mt-12 flex flex-col items-center gap-6">
         <div className="flex flex-wrap justify-center gap-3 px-2">
           {TECH_TAGS.map((tag, i) => (
             <div key={i} className="bg-white/70 border-2 border-black rounded-full px-5 py-2 font-headline font-bold text-sm md:text-base shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
@@ -120,8 +116,7 @@ export function SectionHero() {
         </Button>
       </div>
 
-      {/* Torn Edge Transition */}
-      <div className="absolute bottom-0 left-0 w-full h-24 bg-transparent torn-edge-svg z-30" />
+      <div className="absolute bottom-0 left-0 w-full h-24 bg-transparent torn-edge-svg z-30" aria-hidden="true" />
     </section>
   );
 }
